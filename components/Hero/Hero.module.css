@@ -1,4 +1,16 @@
 .title {
   font-size: 36px;
-  z-index: 1;
+  font-weight: 400;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  justify-content: center;
+  text-align: center;
+}
+.text {
+  font-size: 18px;
+  color: var(--neutral);
 }

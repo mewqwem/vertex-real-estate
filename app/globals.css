@@ -1,6 +1,7 @@
 :root {
   --primary: #155dfb;
   --primary-hover: #0000b4c2;
+  --neutral: #838b8b;
 }
 
 html {
@@ -68,4 +69,17 @@ ol {
 }
 main {
   padding-top: 61px; /* Або margin-top */
+}
+.section {
+  padding: 60px 0;
+}
+@media only screen and (min-width: 768px) {
+  .section {
+    padding: 120px 0;
+  }
+}
+.hero {
+  background:
+    linear-gradient(-45deg, rgba(36, 36, 36, 0.7), rgba(34, 34, 34, 0.7)),
+    url("/heroBg.jpg");
 }
