@@ -1,0 +1,21 @@
+.nav {
+  width: 100%;
+}
+.navButtonWrapper {
+  width: 100%;
+}
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.btnIcon {
+  width: 16px;
+  height: 16px;
+}
+.navItem {
+  transition: color 0.3s ease;
+}
+.navItem:hover {
+  color: var(--primary-hover);
+}

@@ -1,0 +1,93 @@
+.header {
+  position: fixed;
+
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  background-color: white;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.345);
+
+  transition: border-bottom 0.3s ease;
+}
+.header.isOpen {
+  border-bottom: 1px solid rgba(128, 128, 128, 0);
+}
+.logo {
+  padding: 15px;
+
+  font-size: 26px;
+
+  margin-right: auto;
+}
+
+.burgerIcon {
+  width: 24px;
+  height: 24px;
+}
+.burgerButton {
+  cursor: pointer;
+}
+
+.mobileMenu {
+  position: absolute;
+  width: 100%;
+  top: 61px;
+  left: 0;
+
+  padding: 25px;
+
+  z-index: 9999;
+
+  display: flex;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+
+  background-color: white;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.345);
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+.mobileMenu.isOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Повертається в нормальну позицію */
+}
+@media (min-width: 769px) {
+  .mobileMenu {
+    display: none;
+  }
+  .burgerButton {
+    display: none;
+  }
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 9998; /* Менше ніж у меню, але більше ніж у контенту сторінки */
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+.backdropVisible {
+  opacity: 1;
+  visibility: visible;
+}
+@media (min-width: 769px) {
+  .backdrop {
+    display: none;
+  }
+}

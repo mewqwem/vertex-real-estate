@@ -1,0 +1,21 @@
+.nav {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
+.navList {
+  display: flex;
+  gap: 32px;
+
+  align-items: center;
+}
+.navItem {
+  transition: color 0.3s ease;
+}
+.navItem:hover {
+  color: var(--primary-hover);
+}
