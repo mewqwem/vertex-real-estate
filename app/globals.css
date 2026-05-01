@@ -61,12 +61,6 @@ ol {
   }
 }
 
-@media screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 64px;
-  }
-}
 main {
   padding-top: 61px; /* Або margin-top */
 }
