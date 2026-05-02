@@ -60,6 +60,11 @@ ol {
     padding: 0 32px;
   }
 }
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 1050px;
+  }
+}
 
 main {
   padding-top: 61px; /* Або margin-top */
@@ -77,3 +82,40 @@ main {
     linear-gradient(-45deg, rgba(36, 36, 36, 0.7), rgba(34, 34, 34, 0.7)),
     url("/heroBg.jpg");
 }
+
+/* #region input */
+
+.input {
+  width: 100%;
+  height: 48px; /* Така сама висота, як у селекта */
+  padding: 0 16px;
+
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 400;
+  color: #1a202c;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.input::placeholder {
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+.input:focus {
+  border-color: #1a5fff;
+  box-shadow: 0 0 0 3px rgba(26, 95, 255, 0.1);
+}
+
+.input.isInvalid {
+  border-color: #ef4444;
+  background-color: #fffafb; /* Легкий відтінок червоного для фону */
+}
+
+/* #endregion */

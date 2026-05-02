@@ -12,6 +12,7 @@ type apartmentTypes =
   | "villa"
   | "townhouse"
   | "duplex"
+  | "commercial"
   | "";
 
 type dealTypes = "buy" | "rent";
@@ -74,6 +75,7 @@ function SearchForm() {
                 <option value="villa">Villa</option>
                 <option value="townhouse">Townhouse</option>
                 <option value="duplex">Duplex</option>
+                <option value="commercial">Commercial</option>
               </Field>
               <ErrorMessage
                 name="apartmentType"

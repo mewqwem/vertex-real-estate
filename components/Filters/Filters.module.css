@@ -1,0 +1,13 @@
+.filtersWrapper {
+  border: 1px solid rgba(210, 210, 210, 0.544);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  padding: 25px;
+}
