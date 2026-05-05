@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.100.9",
+    "axios": "^1.16.0",
     "formik": "^2.4.9",
     "next": "16.2.4",
     "rc-slider": "^11.1.9",
