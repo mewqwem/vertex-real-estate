@@ -20,7 +20,11 @@ const validationSchema = Yup.object().shape({
   size: Yup.number(),
 });
 
-function Filters() {
+interface FiltersProps {
+  apartmentsCount: number;
+}
+
+function Filters({ apartmentsCount }: FiltersProps) {
   const handleSubmit = () => {
     console.log("hi");
   };
@@ -30,31 +34,34 @@ function Filters() {
   };
 
   return (
-    <div className={css.filtersWrapper}>
-      <Formik
-        onSubmit={handleSubmit}
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-      >
-        <Form className={css.form}>
-          <PriceRangeFilter min={0} max={9999} onChange={handleChange} />
-          <label className={css.inputLabel}>
-            Rooms
-            <Field className={`input`} name="rooms" as="select">
-              <option value="">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4+</option>
-            </Field>
-          </label>
-          <label className={css.inputLabel}>
-            Size (m2)
-            <Field className={`input`} name="size" type="number"></Field>
-          </label>
-        </Form>
-      </Formik>
-    </div>
+    <>
+      <p className="neutralText">Found {apartmentsCount} appartments</p>
+      <div className={css.filtersWrapper}>
+        <Formik
+          onSubmit={handleSubmit}
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+        >
+          <Form className={css.form}>
+            <PriceRangeFilter min={0} max={9999} onChange={handleChange} />
+            <label className={css.inputLabel}>
+              Rooms
+              <Field className={`input`} name="rooms" as="select">
+                <option value="">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </Field>
+            </label>
+            <label className={css.inputLabel}>
+              Size (m2)
+              <Field className={`input`} name="size" type="number"></Field>
+            </label>
+          </Form>
+        </Formik>
+      </div>
+    </>
   );
 }
 

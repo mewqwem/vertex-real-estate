@@ -1,0 +1,24 @@
+/* .apartmentList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    }    */
+.apartmentList {
+  display: grid;
+  grid-template-columns: 1fr; /* По замовчуванню 1 колонка (мобільні) */
+  gap: 20px; /* Відстань між картками */
+}
+
+/* Планшети (ширина екрану від 768px) */
+@media (min-width: 768px) {
+  .apartmentList {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+  }
+}
+
+/* Десктопи (ширина екрану від 1024px) */
+@media (min-width: 1440px) {
+  .apartmentList {
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+  }
+}

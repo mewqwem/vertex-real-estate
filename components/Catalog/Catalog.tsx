@@ -1,7 +1,7 @@
 import React from "react";
 import css from "./Catalog.module.css";
 import Filters from "../Filters/Filters";
-import ApartmentList from "../ApartmentList/ApartmentList";
+import ApartmentClient from "../ApartmentClient/ApartmentClient";
 
 function Catalog() {
   return (
@@ -9,8 +9,7 @@ function Catalog() {
       <div className={css.titleWrapper}>
         <h2 className={css.sectionTitle}>Catalog</h2>
       </div>
-      <Filters />
-      <ApartmentList />
+      <ApartmentClient />
     </div>
   );
 }

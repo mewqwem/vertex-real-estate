@@ -2,6 +2,7 @@
   --primary: #155dfb;
   --primary-hover: #0000b4c2;
   --neutral: #838b8b;
+  --hot: #ef4444;
 }
 
 html {
@@ -70,18 +71,18 @@ main {
   padding-top: 61px; /* Або margin-top */
 }
 .section {
-  padding: 60px 0;
+  padding: 30px 0;
 }
 @media only screen and (min-width: 768px) {
   .section {
-    padding: 120px 0;
+    padding: 50px 0;
   }
 }
-.hero {
-  background:
-    linear-gradient(-45deg, rgba(36, 36, 36, 0.7), rgba(34, 34, 34, 0.7)),
-    url("/heroBg.jpg");
-}
+/* @media only screen and (min-width: 1440px) {
+  .section {
+    padding: 90px 0;
+  }
+} */
 
 /* #region input */
 
@@ -119,3 +120,7 @@ main {
 }
 
 /* #endregion */
+.neutralText {
+  font-size: 14px;
+  color: var(--neutral);
+}

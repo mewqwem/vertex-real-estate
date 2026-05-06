@@ -37,7 +37,7 @@ export const PriceRangeFilter = ({
         max={max}
         defaultValue={[min, max]}
         onChange={handleSliderChange}
-        onAfterChange={handleAfterChange}
+        onChangeComplete={handleAfterChange}
         trackStyle={[{ backgroundColor: "#2563eb", height: 6 }]} // Blue-600
         handleStyle={[
           {
