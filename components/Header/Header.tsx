@@ -6,9 +6,12 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { RiCloseLargeLine } from "react-icons/ri";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Navigation from "../Navigation/Navigation";
+import { usePathname } from "next/navigation";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const path = usePathname();
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -25,7 +28,7 @@ function Header() {
           YourLogo
         </Link>
       </div>
-      <Navigation />
+      <Navigation path={path} />
       <button onClick={toggleMenu} className={css.burgerButton}>
         {isOpen ? (
           <RiCloseLargeLine className={css.burgerIcon} />

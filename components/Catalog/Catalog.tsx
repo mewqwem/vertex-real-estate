@@ -1,7 +1,6 @@
 import React from "react";
 import css from "./Catalog.module.css";
-import Filters from "../Filters/Filters";
-import ApartmentClient from "../ApartmentClient/ApartmentClient";
+import ApartmentClient from "../Apartment/ApartmentClient/ApartmentClient";
 
 function Catalog() {
   return (

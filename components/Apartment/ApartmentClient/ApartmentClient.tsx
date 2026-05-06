@@ -3,7 +3,7 @@
 import { getAllApartments } from "@/lib/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import ApartmentList from "../ApartmentList/ApartmentList";
-import Filters from "../Filters/Filters";
+import Filters from "../../Filters/Filters";
 import css from "./ApartmentClient.module.css";
 
 function ApartmentClient() {

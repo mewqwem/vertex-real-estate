@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import css from "./Filters.module.css";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";

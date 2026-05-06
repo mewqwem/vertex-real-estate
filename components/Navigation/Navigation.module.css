@@ -19,3 +19,6 @@
 .navItem:hover {
   color: var(--primary-hover);
 }
+.activeTab {
+  color: var(--primary);
+}

@@ -4,20 +4,30 @@ import Link from "next/link";
 import UniqButton from "../UniqButton/UniqButton";
 import { BsTelephoneForward } from "react-icons/bs";
 
-function Navigation() {
+interface NavigationProps {
+  path: string;
+}
+
+function Navigation({ path }: NavigationProps) {
   return (
     <nav className={css.nav}>
       <ul className={css.navList}>
-        <li className={css.navItem}>
-          <Link href={"#home"}>Home</Link>
+        <li className={`${css.navItem} ${path === "/" ? css.activeTab : ""}`}>
+          <Link href={"/"}>Home</Link>
         </li>
-        <li className={css.navItem}>
-          <Link href={"#catalog"}>Catalog</Link>
+        <li
+          className={`${css.navItem} ${path === "/catalog" ? css.activeTab : ""}`}
+        >
+          <Link href={"/catalog"}>Catalog</Link>
         </li>
-        <li className={css.navItem}>
+        <li
+          className={`${css.navItem} ${path === "/Services" ? css.activeTab : ""}`}
+        >
           <Link href={"#services"}>Services</Link>
         </li>
-        <li className={css.navItem}>
+        <li
+          className={`${css.navItem} ${path === "/aboutUs" ? css.activeTab : ""}`}
+        >
           <Link href={"#aboutUs"}>About us</Link>
         </li>
         <div className={css.navButtonWrapper}>

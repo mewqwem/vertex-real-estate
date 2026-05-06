@@ -8,7 +8,7 @@ import { Apartment } from "@/types/apartments";
 import { LuBed, LuSquareDashed } from "react-icons/lu";
 import { RiStairsLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
-import UniqButton from "../UniqButton/UniqButton";
+import UniqButton from "../../UniqButton/UniqButton";
 import { GoLinkExternal } from "react-icons/go";
 
 interface ApartmentItemProps {
