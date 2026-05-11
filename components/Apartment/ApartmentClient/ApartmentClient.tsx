@@ -17,8 +17,6 @@ function ApartmentClient() {
     staleTime: 60 * 1000,
   });
 
-  console.log(data);
-
   const apartments = data?.data || [];
   const apartmentsCount = data?.count || 0;
 

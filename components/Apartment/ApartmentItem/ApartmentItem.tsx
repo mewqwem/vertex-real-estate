@@ -30,6 +30,8 @@ const isHotPrice = (price: number): boolean => {
   return isHotPrice;
 };
 
+const handleClickApartment = () => {};
+
 const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +53,7 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
             <TailSpin
               height="40"
               width="40"
-              color="#505050"
+              color="var(--primary)"
               ariaLabel="tail-spin-loading"
             />
           </div>
@@ -98,7 +100,11 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
       </div>
       <div className={css.separator}></div>
       <div className={css.btnWrapper}>
-        <UniqButton>
+        <UniqButton
+          type="link"
+          href={`/catalog/${apartment._id}`}
+          onClick={handleClickApartment}
+        >
           More details <GoLinkExternal />
         </UniqButton>
       </div>

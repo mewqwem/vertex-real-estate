@@ -1,8 +1,28 @@
 :root {
   --primary: #155dfb;
   --primary-hover: #0000b4c2;
+  --primary-border: #08080892;
   --neutral: #838b8b;
   --hot: #ef4444;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  height: 100vh;
 }
 
 html {
@@ -123,4 +143,21 @@ main {
 .neutralText {
   font-size: 14px;
   color: var(--neutral);
+}
+.loadingWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  backdrop-filter: blur(4px);
 }

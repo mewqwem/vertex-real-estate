@@ -1,8 +1,8 @@
 import Link from "next/link";
-import React from "react";
-import UniqButton from "../UniqButton/UniqButton";
 import css from "./MobileMenu.module.css";
-import { BsTelephoneForward } from "react-icons/bs";
+import { IoHomeOutline } from "react-icons/io5";
+import { CiGrid41 } from "react-icons/ci";
+import Filters from "../Filters/Filters";
 
 interface MobileMenuProps {
   onLinkClick?: () => void;
@@ -13,31 +13,23 @@ function MobileMenu({ onLinkClick }: MobileMenuProps) {
     <nav className={css.nav}>
       <ul className={css.navList}>
         <li className={css.navItem}>
-          <Link href={"#home"} onClick={onLinkClick}>
+          <Link href={"/"} onClick={onLinkClick} className={css.navLink}>
+            <IoHomeOutline />
             Home
           </Link>
         </li>
         <li className={css.navItem}>
-          <Link href={"#catalog"} onClick={onLinkClick}>
+          <Link href={"/catalog"} onClick={onLinkClick} className={css.navLink}>
+            <CiGrid41 />
             Catalog
           </Link>
         </li>
-        <li className={css.navItem}>
-          <Link href={"#services"} onClick={onLinkClick}>
-            Services
-          </Link>
-        </li>
-        <li className={css.navItem}>
-          <Link href={"#aboutUs"} onClick={onLinkClick}>
-            About us
-          </Link>
-        </li>
-        <div className={css.navButtonWrapper}>
+        {/* <div className={css.navButtonWrapper}>
           <UniqButton onClick={onLinkClick}>
             <BsTelephoneForward className={css.btnIcon} />
             Contact
           </UniqButton>
-        </div>
+        </div> */}
       </ul>
     </nav>
   );

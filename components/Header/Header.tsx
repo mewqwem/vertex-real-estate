@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import css from "./Header.module.css";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -16,6 +16,18 @@ function Header() {
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, [isOpen]);
 
   const closeMenu = () => {
     setIsOpen(false);

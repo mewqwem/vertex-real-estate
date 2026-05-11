@@ -11,3 +11,44 @@
 
   padding: 25px;
 }
+.filterBtn {
+  padding: 8px;
+  font-size: 20px;
+
+  min-width: 80px;
+  background-color: var(--primary);
+  display: inline-flex;
+  justify-content: center;
+
+  gap: 8px;
+
+  border-radius: 12px;
+}
+.filterIcon {
+  stroke: white;
+}
+.filterText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+
+  color: white;
+}
+@media only screen and (min-width: 768px) {
+  .filterText {
+    /* Повертаємо текст у потік на планшетах */
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}

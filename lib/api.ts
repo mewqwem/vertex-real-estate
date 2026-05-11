@@ -16,3 +16,10 @@ export const getAllApartments = async () => {
     await apartmentInstance.get<ApartmentsResponse>("apartments");
   return data;
 };
+
+export const getApartmentById = async (apartmentId: string) => {
+  const { data } = await apartmentInstance.get<Apartment>(
+    `/apartments/${apartmentId}`,
+  );
+  return data;
+};
