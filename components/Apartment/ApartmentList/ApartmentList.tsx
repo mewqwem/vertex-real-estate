@@ -10,7 +10,7 @@ function ApartmentList({ apartments }: ApartmentListProps) {
   return (
     <ul className={css.apartmentList}>
       {apartments.map((apartment) => (
-        <ApartmentItem key={apartment.id} apartment={apartment} />
+        <ApartmentItem key={apartment._id} apartment={apartment} />
       ))}
     </ul>
   );

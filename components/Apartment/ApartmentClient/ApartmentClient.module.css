@@ -3,3 +3,28 @@
   flex-direction: column;
   gap: 36px;
 }
+.loadingApartments {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+}
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+}
+.errorWrapper p {
+  font-size: 18px;
+}
+@media only screen and (min-width: 768px) {
+  .errorWrapper p {
+    font-size: 22px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .errorWrapper p {
+    font-size: 28px;
+  }
+}
