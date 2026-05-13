@@ -3,6 +3,9 @@
   --primary-hover: #0000b4c2;
   --primary-border: #08080892;
   --neutral: #838b8b;
+  --color-gray-500: oklch(55.1% 0.027 264.364);
+  --color-gray-100: oklch(96.7% 0.003 264.542);
+  --color-blue-100: oklch(93.2% 0.032 255.585);
   --hot: #ef4444;
 }
 

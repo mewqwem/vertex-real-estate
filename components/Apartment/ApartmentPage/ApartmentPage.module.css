@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.apartmentInfo {
+  border: 1px solid rgba(210, 210, 210, 0.544);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.headerInfo {
+  position: relative;
+  display: flex;
+}
+.title {
+  font-weight: 400;
+  max-width: 200px;
+}
+@media only screen and (min-width: 768px) {
+  .title {
+    max-width: 550px;
+  }
+}
+.headerTitle {
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.createdAtText {
+  position: absolute;
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--color-gray-100);
+  border-radius: 12px;
+
+  padding: 12px;
+
+  max-width: 100px;
+
+  color: var(--color-gray-500);
+  font-weight: 400;
+}
+.location {
+  color: var(--color-gray-500);
+  font-weight: 400;
+
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.apartmentSubTitle {
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.apartmentDescriptionText {
+  font-weight: 300;
+}
+
+.decorateLine {
+  border: none;
+  border-top: 1px solid rgba(96, 96, 96, 0.315);
+  width: 100%;
+}

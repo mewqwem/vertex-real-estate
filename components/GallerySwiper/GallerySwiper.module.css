@@ -1,0 +1,63 @@
+.swiper {
+  width: 100%;
+  height: 400px; /* Можеш змінити під свій дизайн */
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+@media only screen and (min-width: 768px) {
+  .swiper {
+    height: 500px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .swiper {
+    height: 600px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Фото заповнює слайд без розтягування */
+}
+
+/* Стилізація кнопок Swiper (опціонально) */
+.swiper :global(.swiper-button-next),
+.swiper :global(.swiper-button-prev) {
+  color: #fff;
+  background-color: #155efb93;
+  border-radius: 12px;
+  padding: 8px;
+
+  transition: all 0.2s ease;
+}
+.swiper :global(.swiper-button-next):hover,
+.swiper :global(.swiper-button-prev):hover {
+  background-color: #155efb;
+  transform: scale(0.9);
+}
+.swiper :global(.swiper-button-next):active,
+.swiper :global(.swiper-button-prev):active {
+  transform: scale(0.7);
+}
+
+.swiper :global(.swiper-pagination-fraction) {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+/* Прозорий фон з блюром */
+.modal :global(.yarl__container) {
+  background-color: rgba(0, 0, 0, 0.706) !important; /* Напівпрозорий чорний */
+}
+
+/* Стилізація кнопок, щоб вони краще виділялися на фоні блюру */
+.modal :global(.yarl__button) {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}

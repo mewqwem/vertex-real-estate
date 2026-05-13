@@ -35,7 +35,9 @@ const handleClickApartment = () => {};
 const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
   const [isLoading, setIsLoading] = useState(true);
-  const [imgSrc, setImgSrc] = useState(apartment.image || placeholderImage);
+
+  const mainImage = apartment.images[0] || placeholderImage;
+  const [imgSrc, setImgSrc] = useState(mainImage);
 
   return (
     <li className={css.apartmentItem}>

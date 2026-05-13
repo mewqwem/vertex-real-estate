@@ -20,16 +20,6 @@ function Navigation({ path }: NavigationProps) {
         >
           <Link href={"/catalog"}>Catalog</Link>
         </li>
-        <li
-          className={`${css.navItem} ${path === "/Services" ? css.activeTab : ""}`}
-        >
-          <Link href={"#services"}>Services</Link>
-        </li>
-        <li
-          className={`${css.navItem} ${path === "/aboutUs" ? css.activeTab : ""}`}
-        >
-          <Link href={"#aboutUs"}>About us</Link>
-        </li>
         <div className={css.navButtonWrapper}>
           <UniqButton>
             <BsTelephoneForward className={css.btnIcon} />

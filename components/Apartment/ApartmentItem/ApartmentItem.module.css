@@ -94,6 +94,7 @@
 .apartmentPrice {
   font-size: 24px;
   font-weight: 600;
+  white-space: nowrap;
   color: var(--primary);
 }
 .tagList {

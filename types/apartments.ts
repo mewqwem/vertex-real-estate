@@ -9,7 +9,7 @@ export interface Apartment {
   floor: number;
   totalFloors: 9;
   description: string;
-  image: string;
+  images: string[];
   features: string[];
   createdAt: string;
   status: string;

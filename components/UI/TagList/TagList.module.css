@@ -1,0 +1,59 @@
+.tagList {
+  display: flex;
+  justify-content: space-around;
+}
+.tagItem {
+  display: flex;
+  gap: 8px;
+
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (min-width: 768px) {
+  .tagItem {
+    gap: 24px;
+  }
+}
+.tagIcon {
+  background-color: var(--color-blue-100);
+  width: 36px;
+  height: 36px;
+
+  border-radius: 14px;
+
+  padding: 6px;
+
+  fill: var(--primary);
+}
+@media only screen and (min-width: 768px) {
+  .tagIcon {
+    width: 48px;
+    height: 48px;
+
+    padding: 8px;
+  }
+}
+.tagContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tagNumber {
+  font-size: 18px;
+  font-weight: 400;
+}
+@media only screen and (min-width: 768px) {
+  .tagNumber {
+    font-size: 24px;
+  }
+}
+.tagText {
+  font-size: 12px;
+  font-weight: 300;
+}
+@media only screen and (min-width: 768px) {
+  .tagText {
+    font-size: 18px;
+  }
+}
