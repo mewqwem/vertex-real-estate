@@ -83,7 +83,7 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
         </div>
         <p className={css.location}>
           <IoLocationOutline />
-          {apartment.location}
+          {apartment.location.address}
         </p>
         <div className={css.tagList}>
           <div className={css.tag}>

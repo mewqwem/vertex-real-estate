@@ -6,6 +6,9 @@ import { TbCurrentLocation } from "react-icons/tb";
 import FeaturesList from "@/components/FeaturesList/FeaturesList";
 import { formatDate } from "@/helpers/formatDate";
 import TagList from "@/components/UI/TagList/TagList";
+import ApartmentMap from "../ApartmentMap/ApartmentMap";
+import { API_KEY, MAP_ID } from "@/lib/api";
+import Link from "next/link";
 
 interface ApartmentPageProps {
   apartment: Apartment;
@@ -25,9 +28,13 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           <div className={`${css.headerInfo} ${css.apartmentInfoItem}`}>
             <div className={css.headerTitle}>
               <h1 className={css.title}>{apartment.title}</h1>
-              <p className={css.location}>
-                <TbCurrentLocation /> {apartment.location}
-              </p>
+              <Link
+                href={"#map"}
+                className={`${css.location} ${css.locationLink}`}
+              >
+                <TbCurrentLocation />
+                {apartment.location.address}
+              </Link>
             </div>
             <div className={css.createdAtText}>
               Created at {formatDate(apartment.createdAt)}
@@ -52,6 +59,11 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
             </p>
           </div>
         </div>
+        <ApartmentMap
+          lat={parseFloat(apartment.location.lat)}
+          lng={parseFloat(apartment.location.lng)}
+          addressName={"asd"}
+        />
       </div>
     </>
   );

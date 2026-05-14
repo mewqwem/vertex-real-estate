@@ -1,7 +1,7 @@
 export interface Apartment {
   _id: number;
   title: string;
-  location: string;
+  location: Location;
   price: number;
   currency: string;
   rooms: number;
@@ -13,4 +13,10 @@ export interface Apartment {
   features: string[];
   createdAt: string;
   status: string;
+}
+
+interface Location {
+  address: string;
+  lat: string;
+  lng: string;
 }

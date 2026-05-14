@@ -1,6 +1,9 @@
 import { Apartment } from "@/types/apartments";
 import axios from "axios";
 
+export const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "";
+export const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID;
+
 export interface ApartmentsResponse {
   success: boolean;
   data: Apartment[];
@@ -22,4 +25,19 @@ export const getApartmentById = async (apartmentId: string) => {
     `/apartments/${apartmentId}`,
   );
   return data;
+};
+
+export const getAddressFromCoords = async (lat: number, lng: number) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=en&key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.status === "OK") {
+      return data.results[0].formatted_address;
+    }
+  } catch (error) {
+    console.error("Error fetching address:", error);
+  }
 };

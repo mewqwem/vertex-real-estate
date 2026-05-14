@@ -71,3 +71,8 @@
   border-top: 1px solid rgba(96, 96, 96, 0.315);
   width: 100%;
 }
+.locationLink {
+  color: var(--primary);
+
+  text-decoration: underline;
+}
