@@ -1,0 +1,43 @@
+.featuresList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+}
+.featuresItem {
+  border: 1px solid var(--color-gray-100);
+
+  border-radius: 6px;
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.iconWrapper {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+}
+.include {
+  background-color: var(--color-green-100);
+}
+.notInclude {
+  background-color: var(--color-red-100);
+}
+.checkIcon {
+  width: 20px;
+  height: 20px;
+
+  stroke: var(--color-green-600);
+}
+.closeIcon {
+  color: var(--color-red-600);
+  font-size: 1.2rem;
+}

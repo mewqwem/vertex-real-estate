@@ -4,15 +4,16 @@
   gap: 32px;
 }
 .apartmentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.appWrapper {
   border: 1px solid rgba(210, 210, 210, 0.544);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
 
   padding: 24px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
 }
 .headerInfo {
   position: relative;
@@ -58,9 +59,12 @@
   gap: 4px;
   align-items: center;
 }
-.apartmentSubTitle {
+.sectionTitle {
   font-weight: 400;
-  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .apartmentDescriptionText {
   font-weight: 300;
@@ -75,4 +79,42 @@
   color: var(--primary);
 
   text-decoration: underline;
+}
+.mapHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mapWrapper {
+  height: 300px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  padding: 12px 0;
+}
+@media only screen and (min-width: 768px) {
+  .mapWrapper {
+    height: 400px;
+  }
+}
+@media only screen and (min-width: 1044px) {
+  .mapWrapper {
+    height: 450px;
+  }
+}
+.mapHeaderTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+@media only screen and (min-width: 768px) {
+  .mapHeaderTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.appPriceWrapper {
+  border: 2px solid var(--primary-border);
 }

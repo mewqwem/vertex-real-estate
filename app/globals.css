@@ -1,12 +1,18 @@
 :root {
   --primary: #155dfb;
   --primary-hover: #0000b4c2;
-  --primary-border: #08080892;
+  --primary-border: #3d7aff6b;
   --neutral: #838b8b;
   --color-gray-500: oklch(55.1% 0.027 264.364);
   --color-gray-100: oklch(96.7% 0.003 264.542);
   --color-blue-100: oklch(93.2% 0.032 255.585);
   --hot: #ef4444;
+  --color-green-100: oklch(96.2% 0.044 156.743);
+  --color-green-600: oklch(62.7% 0.194 149.214);
+  --color-red-600: oklch(45.534% 0.18686 29.223);
+  --color-red-100: oklch(92.096% 0.03554 17.655);
+  --telegram-color: #0088cc;
+  --whatsapp-color: #25d366;
 }
 
 .visually-hidden {

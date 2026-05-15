@@ -1,14 +1,16 @@
 import { Apartment } from "@/types/apartments";
-import React from "react";
 import css from "./ApartmentPage.module.css";
 import GallerySwiper from "@/components/GallerySwiper/GallerySwiper";
 import { TbCurrentLocation } from "react-icons/tb";
-import FeaturesList from "@/components/FeaturesList/FeaturesList";
 import { formatDate } from "@/helpers/formatDate";
 import TagList from "@/components/UI/TagList/TagList";
 import ApartmentMap from "../ApartmentMap/ApartmentMap";
-import { API_KEY, MAP_ID } from "@/lib/api";
 import Link from "next/link";
+import FeaturesList from "@/components/FeaturesList/FeaturesList";
+import { MdChecklistRtl } from "react-icons/md";
+import { BsGeoAlt } from "react-icons/bs";
+import ApartmentPrice from "./ApartmentPrice/ApartmentPrice";
+import { LiaCoinsSolid } from "react-icons/lia";
 
 interface ApartmentPageProps {
   apartment: Apartment;
@@ -16,54 +18,89 @@ interface ApartmentPageProps {
 
 function ApartmentPage({ apartment }: ApartmentPageProps) {
   const apartmentGallery = apartment.images;
-  const features = apartment.features;
+  const googleMapsUrl = `https://www.google.com/maps?q=${apartment.location.lat},${apartment.location.lng}`;
 
   return (
     <>
       <div className={css.wrapper}>
-        <div className={css.galleryWrapper}>
-          <GallerySwiper apartmentGallery={apartmentGallery} />
-        </div>
-        <div className={css.apartmentInfo}>
-          <div className={`${css.headerInfo} ${css.apartmentInfoItem}`}>
-            <div className={css.headerTitle}>
-              <h1 className={css.title}>{apartment.title}</h1>
-              <Link
-                href={"#map"}
-                className={`${css.location} ${css.locationLink}`}
-              >
-                <TbCurrentLocation />
-                {apartment.location.address}
-              </Link>
-            </div>
-            <div className={css.createdAtText}>
-              Created at {formatDate(apartment.createdAt)}
-            </div>
+        <div className={css.mainContent}>
+          <div className={css.galleryWrapper}>
+            <GallerySwiper apartmentGallery={apartmentGallery} />
           </div>
-          <div className={css.decorateLine}></div>
-          <div className={`${css.tagList} ${css.apartmentInfoItem}`}>
-            <TagList
-              rooms={apartment.rooms}
-              area={apartment.area}
-              floor={apartment.floor}
-              totalFloors={apartment.totalFloors}
-            />
-          </div>
-          <div className={css.decorateLine}></div>
-          <div
-            className={`${css.ApartmentDescription} ${css.apartmentInfoItem}`}
-          >
-            <h2 className={css.apartmentSubTitle}>Description</h2>
+          <section className={`${css.apartmentInfo} ${css.appWrapper}`}>
+            <div className={`${css.headerInfo} ${css.apartmentInfoItem}`}>
+              <div className={css.headerTitle}>
+                <h1 className={css.title}>{apartment.title}</h1>
+                <Link
+                  href={"#map"}
+                  className={`${css.location} ${css.locationLink}`}
+                >
+                  <TbCurrentLocation />
+                  {apartment.location.address}
+                </Link>
+              </div>
+              <div className={css.createdAtText}>
+                Created at {formatDate(apartment.createdAt)}
+              </div>
+            </div>
+            <div className={css.decorateLine}></div>
+            <div className={`${css.tagList} ${css.apartmentInfoItem}`}>
+              <TagList
+                rooms={apartment.rooms}
+                area={apartment.area}
+                floor={apartment.floor}
+                totalFloors={apartment.totalFloors}
+              />
+            </div>
+            <div className={css.decorateLine}></div>
+            <h2 className={css.sectionTitle}>Description</h2>
             <p className={css.apartmentDescriptionText}>
               {apartment.description}
             </p>
-          </div>
+          </section>
+          <section className={`${css.appWrapper}`} id="map">
+            <div className={css.mapHeader}>
+              <div className={css.mapHeaderTitleWrapper}>
+                <h2 className={css.sectionTitle}>
+                  Adress Map <BsGeoAlt />
+                </h2>
+                <Link
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${css.locationLink}`}
+                >
+                  Show on Google Maps
+                </Link>
+              </div>
+              <p className={`${css.location}`}>
+                <TbCurrentLocation />
+                {apartment.location.address}
+              </p>
+            </div>
+            <div className={css.mapWrapper}>
+              <ApartmentMap
+                lat={parseFloat(apartment.location.lat)}
+                lng={parseFloat(apartment.location.lng)}
+                addressName={apartment.location.address}
+              />
+            </div>
+          </section>
+          <section className={`${css.appWrapper}`}>
+            <h2 className={css.sectionTitle}>
+              Features <MdChecklistRtl />
+            </h2>
+            <FeaturesList features={apartment.features} />
+          </section>
         </div>
-        <ApartmentMap
-          lat={parseFloat(apartment.location.lat)}
-          lng={parseFloat(apartment.location.lng)}
-          addressName={"asd"}
-        />
+        <aside className={css.sidebarPrice}>
+          <section className={`${css.appWrapper} ${css.appPriceWrapper}`}>
+            <h2 className={css.sectionTitle}>
+              Price <LiaCoinsSolid />
+            </h2>
+            <ApartmentPrice price={apartment.price} />
+          </section>
+        </aside>
       </div>
     </>
   );

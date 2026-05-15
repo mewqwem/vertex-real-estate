@@ -1,0 +1,40 @@
+.price {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--primary);
+
+  padding: 12px 0;
+}
+.contactsList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  color: #fff;
+}
+.contactsItem {
+  border-radius: 12px;
+
+  padding: 12px 16px;
+
+  transition: opacity 0.2s ease;
+}
+.contactsLink {
+  display: flex;
+  gap: 12px;
+
+  justify-content: center;
+}
+.contactsItem:hover {
+  opacity: 0.8;
+}
+.contactsForm {
+  background-color: var(--primary);
+}
+.contactsTelegram {
+  background-color: var(--telegram-color);
+}
+.contactsWhatsapp {
+  background-color: var(--whatsapp-color);
+}

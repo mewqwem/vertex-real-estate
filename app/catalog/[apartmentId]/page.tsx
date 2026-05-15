@@ -14,13 +14,13 @@ async function page({ params }: { params: Promise<{ apartmentId: string }> }) {
     const apartment = await getApartmentById(apartmentId);
 
     return (
-      <div className={`container ${css.contentWrapper}`}>
+      <section className={`container ${css.contentWrapper}`}>
         <UniqButton type="routeBack" className={css.btnBack}>
           <IoArrowBackOutline className={css.BtnBackIcon} />
           Back to Catalog
         </UniqButton>
         <ApartmentPage apartment={apartment} />
-      </div>
+      </section>
     );
   } catch (err: unknown) {
     let errorMessage = "An unexpected error occurred";

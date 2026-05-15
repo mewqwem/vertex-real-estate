@@ -1,0 +1,40 @@
+import React from "react";
+import css from "./ApartmentPrice.module.css";
+import Link from "next/link";
+import { FaRegCalendarAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+
+interface ApartmentPriceProps {
+  price: number;
+}
+
+function ApartmentPrice({ price }: ApartmentPriceProps) {
+  return (
+    <>
+      <div>
+        <p className={css.price}>$ {price}</p>
+      </div>
+      <ul className={css.contactsList}>
+        <li className={`${css.contactsItem} ${css.contactsForm}`}>
+          <Link href={""} className={css.contactsLink}>
+            <FaRegCalendarAlt />
+            Sign up for a viewing
+          </Link>
+        </li>
+        <li className={`${css.contactsItem} ${css.contactsTelegram}`}>
+          <Link href={""} className={css.contactsLink}>
+            <FaTelegramPlane />
+            Telegram
+          </Link>
+        </li>
+        <li className={`${css.contactsItem} ${css.contactsWhatsapp}`}>
+          <Link href={""} className={css.contactsLink}>
+            <FaWhatsapp />
+            WhatsApp
+          </Link>
+        </li>
+      </ul>
+    </>
+  );
+}
+
+export default ApartmentPrice;
