@@ -1,4 +1,6 @@
+import { ApartmentFilters } from "@/types/apartmentFilters";
 import { Apartment } from "@/types/apartments";
+import { buildApartmentParams } from "@/lib/apartmentFilters";
 import axios from "axios";
 
 export const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "";
@@ -20,11 +22,16 @@ const apartmentInstance = axios.create({
 
 export const getAllApartments = async (
   page: number,
+  filters: ApartmentFilters = {},
 ): Promise<ApartmentsResponse> => {
   const { data } = await apartmentInstance.get<ApartmentsResponse>(
     "apartments",
     {
-      params: { page, perPage: APARTMENTS_PER_PAGE },
+      params: {
+        page,
+        perPage: APARTMENTS_PER_PAGE,
+        ...buildApartmentParams(filters),
+      },
     },
   );
   return data;

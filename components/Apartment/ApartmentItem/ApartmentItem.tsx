@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { TailSpin } from "react-loader-spinner";
 import css from "./ApartmentItem.module.css";
+import { getApartmentMainImage } from "@/helpers/getApartmentImages";
 import { Apartment } from "@/types/apartments";
 import { LuBed, LuSquareDashed } from "react-icons/lu";
 import { RiStairsLine } from "react-icons/ri";
@@ -15,7 +16,8 @@ interface ApartmentItemProps {
   apartment: Apartment;
 }
 
-const isNewApartment = (createdAt: string): boolean => {
+const isNewApartment = (createdAt?: string): boolean => {
+  if (!createdAt) return false;
   const apartmentDate = new Date(createdAt);
   const now = new Date();
   const daysAgo =
@@ -36,7 +38,7 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
   const [isLoading, setIsLoading] = useState(true);
 
-  const mainImage = apartment.images[0] || placeholderImage;
+  const mainImage = getApartmentMainImage(apartment, placeholderImage);
   const [imgSrc, setImgSrc] = useState(mainImage);
 
   return (

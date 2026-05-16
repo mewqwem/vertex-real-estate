@@ -1,30 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 interface PriceRangeFilterProps {
   min: number;
   max: number;
-  onChange: (values: number | number[]) => void;
+  value: [number, number];
+  onChange: (values: [number, number]) => void;
 }
 
 export const PriceRangeFilter = ({
   min,
   max,
+  value,
   onChange,
 }: PriceRangeFilterProps) => {
-  const [range, setRange] = useState<[number, number]>([min, max]);
+  const [range, setRange] = useState<[number, number]>(value);
 
-  const handleSliderChange = (value: number | number[]) => {
-    if (Array.isArray(value)) {
-      setRange([value[0], value[1]]);
+  useEffect(() => {
+    setRange(value);
+  }, [value]);
+
+  const handleSliderChange = (next: number | number[]) => {
+    if (Array.isArray(next)) {
+      setRange([next[0], next[1]]);
     }
   };
 
-  const handleAfterChange = (value: number | number[]) => {
-    onChange(value);
+  const handleAfterChange = (next: number | number[]) => {
+    if (Array.isArray(next)) {
+      onChange([next[0], next[1]]);
+    }
   };
 
   return (
@@ -35,10 +43,10 @@ export const PriceRangeFilter = ({
         range
         min={min}
         max={max}
-        defaultValue={[min, max]}
+        value={range}
         onChange={handleSliderChange}
         onChangeComplete={handleAfterChange}
-        trackStyle={[{ backgroundColor: "#2563eb", height: 6 }]} // Blue-600
+        trackStyle={[{ backgroundColor: "#2563eb", height: 6 }]}
         handleStyle={[
           {
             borderColor: "#2563eb",
@@ -77,3 +85,6 @@ export const PriceRangeFilter = ({
     </div>
   );
 };
+
+
+

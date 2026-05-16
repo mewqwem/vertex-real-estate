@@ -1,5 +1,5 @@
 export interface Apartment {
-  _id: number;
+  _id: string;
   title: string;
   location: Location;
   price: number;
@@ -7,16 +7,19 @@ export interface Apartment {
   rooms: number;
   area: number;
   floor: number;
-  totalFloors: 9;
+  totalFloors: number;
   description: string;
-  images: string[];
+  image?: string;
+  images?: string[];
   features: string[];
-  createdAt: string;
+  createdAt?: string;
   status: string;
+  dealType?: "buy" | "rent";
+  apartmentType?: string;
 }
 
 interface Location {
   address: string;
-  lat: string;
-  lng: string;
+  lat: number | string;
+  lng: number | string;
 }

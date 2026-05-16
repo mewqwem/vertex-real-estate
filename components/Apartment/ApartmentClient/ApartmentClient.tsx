@@ -1,7 +1,14 @@
 "use client";
 
 import { getAllApartments } from "@/lib/api";
+import {
+  filtersToSearchParams,
+  parseFiltersFromSearchParams,
+} from "@/lib/apartmentFilters";
+import { ApartmentFilters } from "@/types/apartmentFilters";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useMemo } from "react";
 import ApartmentList from "../ApartmentList/ApartmentList";
 import Filters from "../../Filters/Filters";
 import css from "./ApartmentClient.module.css";
@@ -10,6 +17,22 @@ import UniqButton from "@/components/UniqButton/UniqButton";
 import { IoReload } from "react-icons/io5";
 
 function ApartmentClient() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const filters = useMemo(
+    () => parseFiltersFromSearchParams(searchParams),
+    [searchParams],
+  );
+
+  const applyFilters = useCallback(
+    (nextFilters: ApartmentFilters) => {
+      const query = filtersToSearchParams(nextFilters);
+      router.replace(query ? `/catalog?${query}` : "/catalog", { scroll: false });
+    },
+    [router],
+  );
+
   const {
     data,
     isError,
@@ -19,8 +42,8 @@ function ApartmentClient() {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["getAllApartments"],
-    queryFn: ({ pageParam }) => getAllApartments(pageParam),
+    queryKey: ["getAllApartments", filters],
+    queryFn: ({ pageParam }) => getAllApartments(pageParam, filters),
     getNextPageParam: (lastPage) => {
       const currentPage = Number(lastPage.page);
       return currentPage < lastPage.totalPages ? currentPage + 1 : undefined;
@@ -33,7 +56,11 @@ function ApartmentClient() {
 
   return (
     <div className={css.wrapper}>
-      <Filters apartmentsCount={apartmentsCount} />
+      <Filters
+        apartmentsCount={apartmentsCount}
+        filters={filters}
+        onApplyFilters={applyFilters}
+      />
       {isLoading ? (
         <div className={css.loadingApartments}>
           <TailSpin color="var(--primary)" />
@@ -63,5 +90,6 @@ function ApartmentClient() {
     </div>
   );
 }
+
 
 export default ApartmentClient;

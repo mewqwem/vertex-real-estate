@@ -1,3 +1,4 @@
+import { getApartmentImages } from "@/helpers/getApartmentImages";
 import { Apartment } from "@/types/apartments";
 import css from "./ApartmentPage.module.css";
 import GallerySwiper from "@/components/GallerySwiper/GallerySwiper";
@@ -17,7 +18,7 @@ interface ApartmentPageProps {
 }
 
 function ApartmentPage({ apartment }: ApartmentPageProps) {
-  const apartmentGallery = apartment.images;
+  const apartmentGallery = getApartmentImages(apartment);
   const googleMapsUrl = `https://www.google.com/maps?q=${apartment.location.lat},${apartment.location.lng}`;
 
   return (
@@ -38,9 +39,11 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
                 {apartment.location.address}
               </Link>
             </div>
-            <div className={css.createdAtText}>
-              Created at {formatDate(apartment.createdAt)}
-            </div>
+            {apartment.createdAt && (
+              <div className={css.createdAtText}>
+                Created at {formatDate(apartment.createdAt)}
+              </div>
+            )}
           </div>
           <div className={css.decorateLine}></div>
           <div className={`${css.tagList} ${css.apartmentInfoItem}`}>
@@ -79,8 +82,8 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           </div>
           <div className={css.mapWrapper}>
             <ApartmentMap
-              lat={parseFloat(apartment.location.lat)}
-              lng={parseFloat(apartment.location.lng)}
+              lat={Number(apartment.location.lat)}
+              lng={Number(apartment.location.lng)}
               addressName={apartment.location.address}
             />
           </div>

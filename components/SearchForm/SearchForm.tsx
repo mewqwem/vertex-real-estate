@@ -1,26 +1,21 @@
 "use client";
+
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import css from "./SearchForm.module.css";
 import UniqButton from "../UniqButton/UniqButton";
-
-type apartmentTypes =
-  | "apartment"
-  | "house"
-  | "cottage"
-  | "villa"
-  | "townhouse"
-  | "duplex"
-  | "commercial"
-  | "";
-
-type dealTypes = "buy" | "rent";
+import {
+  APARTMENT_TYPE_OPTIONS,
+  ApartmentType,
+  DealType,
+} from "@/types/apartmentFilters";
+import { filtersToSearchParams } from "@/lib/apartmentFilters";
 
 interface SearchFormValues {
   location: string;
-  apartmentType: apartmentTypes;
-  dealType: dealTypes;
+  apartmentType: ApartmentType | "";
+  dealType: DealType;
 }
 
 const initialValues: SearchFormValues = {
@@ -37,9 +32,18 @@ const validationSchema = Yup.object().shape({
 });
 
 function SearchForm() {
+  const router = useRouter();
+
   const handleSubmit = (values: SearchFormValues) => {
-    console.log("Form Data:", values);
+    const query = filtersToSearchParams({
+      location: values.location.trim(),
+      dealType: values.dealType,
+      apartmentType: values.apartmentType ? values.apartmentType : undefined,
+    });
+
+    router.push(`/catalog?${query}`);
   };
+
   return (
     <div className={css.formWrapper}>
       <Formik
@@ -49,7 +53,6 @@ function SearchForm() {
       >
         {({ errors, touched }) => (
           <Form className={css.form}>
-            {/* Радіо-кнопки (Deal Type) */}
             <div className={css.radioGroup}>
               <label className={css.radioLabel}>
                 <Field type="radio" name="dealType" value="buy" />
@@ -59,31 +62,20 @@ function SearchForm() {
                 <Field type="radio" name="dealType" value="rent" />
                 <span>Rent</span>
               </label>
-              <ErrorMessage
-                name="dealType"
-                component="span"
-                className={css.error}
-              />
             </div>
-            {/* Селект Тип Апартаментів */}
+
             <div className={css.fieldGroup}>
               <Field as="select" name="apartmentType" className={css.select}>
-                <option value="">Select property type</option>
-                <option value="apartment">Apartment</option>
-                <option value="house">House</option>
-                <option value="cottage">Cottage</option>
-                <option value="villa">Villa</option>
-                <option value="townhouse">Townhouse</option>
-                <option value="duplex">Duplex</option>
-                <option value="commercial">Commercial</option>
+                {APARTMENT_TYPE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label === "Any property type"
+                      ? "Select property type"
+                      : option.label}
+                  </option>
+                ))}
               </Field>
-              <ErrorMessage
-                name="apartmentType"
-                component="span"
-                className={css.error}
-              />
             </div>
-            {/* Поле Локація */}
+
             <div className={css.fieldGroup}>
               <Field
                 name="location"
