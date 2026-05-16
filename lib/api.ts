@@ -5,18 +5,28 @@ export const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "";
 export const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID;
 
 export interface ApartmentsResponse {
-  success: boolean;
-  data: Apartment[];
-  count: number;
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  apartments: Apartment[];
 }
+
+export const APARTMENTS_PER_PAGE = 6;
 
 const apartmentInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
 });
 
-export const getAllApartments = async () => {
-  const { data } =
-    await apartmentInstance.get<ApartmentsResponse>("apartments");
+export const getAllApartments = async (
+  page: number,
+): Promise<ApartmentsResponse> => {
+  const { data } = await apartmentInstance.get<ApartmentsResponse>(
+    "apartments",
+    {
+      params: { page, perPage: APARTMENTS_PER_PAGE },
+    },
+  );
   return data;
 };
 
