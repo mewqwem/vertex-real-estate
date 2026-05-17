@@ -90,6 +90,7 @@ function ApartmentClient() {
         filters={filters}
         onApplyFilters={applyFilters}
         isLoading={isLoading}
+        isError={isError}
       />
 
       {isLoading ? (

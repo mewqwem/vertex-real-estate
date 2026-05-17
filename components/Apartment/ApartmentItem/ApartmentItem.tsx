@@ -11,9 +11,11 @@ import { RiStairsLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import UniqButton from "../../UniqButton/UniqButton";
 import { GoLinkExternal } from "react-icons/go";
+import Link from "next/link";
 
 interface ApartmentItemProps {
   apartment: Apartment;
+  apartmentIndex: number;
 }
 
 const isNewApartment = (createdAt?: string): boolean => {
@@ -25,16 +27,22 @@ const isNewApartment = (createdAt?: string): boolean => {
   return daysAgo <= 30;
 };
 
-const isHotPrice = (price: number): boolean => {
-  const apartmentPrice = price;
-  const isHotPrice = apartmentPrice <= 450000;
+const isHotPrice = (price: number, dealType?: string): boolean => {
+  let isHotPrice = false;
+
+  if (price <= 450000 && dealType === "buy") {
+    isHotPrice = true;
+  }
+  if (price <= 2499 && dealType === "rent") {
+    isHotPrice = true;
+  }
 
   return isHotPrice;
 };
 
 const handleClickApartment = () => {};
 
-const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
+const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,10 +56,11 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
           {isNewApartment(apartment.createdAt) && (
             <div className={`${css.badge} ${css.new}`}>New</div>
           )}
-          {isHotPrice(apartment.price) && (
+          {isHotPrice(apartment.price, apartment.dealType) && (
             <div className={`${css.badge} ${css.hot}`}>Hot</div>
           )}
         </div>
+
         {isLoading && (
           <div className={css.loading}>
             <TailSpin
@@ -63,18 +72,21 @@ const ApartmentItem = ({ apartment }: ApartmentItemProps) => {
           </div>
         )}
 
-        <Image
-          src={imgSrc}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          alt={apartment.title}
-          className={css.apartmentImage}
-          onLoad={() => setIsLoading(false)}
-          onError={() => {
-            setImgSrc(placeholderImage);
-            setIsLoading(false);
-          }}
-        />
+        <Link href={`/catalog/${apartment._id}`} className={css.link}>
+          <Image
+            src={imgSrc}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            alt={apartment.title}
+            className={css.apartmentImage}
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setImgSrc(placeholderImage);
+              setIsLoading(false);
+            }}
+            priority={apartmentIndex < 6}
+          />
+        </Link>
       </div>
       <div className={css.apartmentInfo}>
         <div className={css.apartmentHead}>

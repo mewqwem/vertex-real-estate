@@ -34,6 +34,12 @@
 
   overflow: hidden;
 }
+.link {
+  display: block;
+  position: relative; /* Next.js will now safely see this relative parent */
+  width: 100%;
+  height: 100%;
+}
 .badgesContainer {
   position: absolute;
   top: 12px;

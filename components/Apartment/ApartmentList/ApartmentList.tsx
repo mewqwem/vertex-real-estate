@@ -9,8 +9,12 @@ interface ApartmentListProps {
 function ApartmentList({ apartments }: ApartmentListProps) {
   return (
     <ul className={css.apartmentList}>
-      {apartments.map((apartment) => (
-        <ApartmentItem key={apartment._id} apartment={apartment} />
+      {apartments.map((apartment, index) => (
+        <ApartmentItem
+          key={apartment._id}
+          apartment={apartment}
+          apartmentIndex={index}
+        />
       ))}
     </ul>
   );

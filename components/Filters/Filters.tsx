@@ -33,6 +33,7 @@ interface FiltersProps {
   filters: ApartmentFilters;
   onApplyFilters: (filters: ApartmentFilters) => void;
   isLoading: boolean;
+  isError: boolean;
 }
 
 function Filters({
@@ -40,14 +41,13 @@ function Filters({
   filters,
   onApplyFilters,
   isLoading,
+  isError,
 }: FiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const formikRef = useRef<FormikProps<ApartmentFiltersFormValues>>(null);
 
   const isFiltersEmpty = Object.keys(filters).length === 0;
-
-  console.log(isFiltersEmpty);
 
   const handleSubmit = (values: ApartmentFiltersFormValues) => {
     onApplyFilters(formValuesToFilters(values));
@@ -144,10 +144,10 @@ function Filters({
                     </Field>
                   </label>
 
-                  <label className={css.inputLabel}>
+                  {/* <label className={css.inputLabel}>
                     Size (m2)
                     <Field className="input" name="area" type="number" />
-                  </label>
+                  </label> */}
 
                   <div className={css.buttonsWrapper}>
                     <div className={css.btnWrapper}>
@@ -172,7 +172,7 @@ function Filters({
           </Formik>
         </div>
       )}
-      {apartmentsCount === 0 && !isLoading && (
+      {apartmentsCount === 0 && !isLoading && !isError && (
         <>
           <div className={css.errorWrapper}>
             <h1 className={css.errorTitle}>No appartments found</h1>
