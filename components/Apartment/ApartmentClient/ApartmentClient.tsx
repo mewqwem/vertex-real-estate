@@ -8,7 +8,7 @@ import {
 import { ApartmentFilters } from "@/types/apartmentFilters";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useEffect, useRef } from "react";
 import ApartmentList from "../ApartmentList/ApartmentList";
 import Filters from "../../Filters/Filters";
 import css from "./ApartmentClient.module.css";
@@ -20,6 +20,9 @@ function ApartmentClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const listWrapperRef = useRef<HTMLDivElement>(null);
+  const prevItemsCountRef = useRef(0);
+
   const filters = useMemo(
     () => parseFiltersFromSearchParams(searchParams),
     [searchParams],
@@ -28,7 +31,9 @@ function ApartmentClient() {
   const applyFilters = useCallback(
     (nextFilters: ApartmentFilters) => {
       const query = filtersToSearchParams(nextFilters);
-      router.replace(query ? `/catalog?${query}` : "/catalog", { scroll: false });
+      router.replace(query ? `/catalog?${query}` : "/catalog", {
+        scroll: false,
+      });
     },
     [router],
   );
@@ -54,13 +59,39 @@ function ApartmentClient() {
   const apartments = data?.pages.flatMap((page) => page.apartments) ?? [];
   const apartmentsCount = data?.pages[0]?.totalItems ?? 0;
 
+  useEffect(() => {
+    if (
+      apartments.length > prevItemsCountRef.current &&
+      listWrapperRef.current
+    ) {
+      const listContainer = listWrapperRef.current.firstElementChild;
+
+      if (listContainer && listContainer.children) {
+        const firstNewItem = listContainer.children[
+          prevItemsCountRef.current
+        ] as HTMLElement;
+
+        if (firstNewItem) {
+          firstNewItem.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      }
+    }
+
+    prevItemsCountRef.current = apartments.length;
+  }, [apartments]);
+
   return (
     <div className={css.wrapper}>
       <Filters
         apartmentsCount={apartmentsCount}
         filters={filters}
         onApplyFilters={applyFilters}
+        isLoading={isLoading}
       />
+
       {isLoading ? (
         <div className={css.loadingApartments}>
           <TailSpin color="var(--primary)" />
@@ -76,7 +107,10 @@ function ApartmentClient() {
         </div>
       ) : (
         <>
-          <ApartmentList apartments={apartments} />
+          <div ref={listWrapperRef}>
+            <ApartmentList apartments={apartments} />
+          </div>
+
           {hasNextPage && (
             <UniqButton
               onClick={() => fetchNextPage()}
@@ -90,6 +124,5 @@ function ApartmentClient() {
     </div>
   );
 }
-
 
 export default ApartmentClient;

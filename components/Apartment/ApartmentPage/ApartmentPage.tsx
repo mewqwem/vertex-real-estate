@@ -1,3 +1,4 @@
+"use client";
 import { getApartmentImages } from "@/helpers/getApartmentImages";
 import { Apartment } from "@/types/apartments";
 import css from "./ApartmentPage.module.css";
@@ -12,6 +13,7 @@ import { MdChecklistRtl } from "react-icons/md";
 import { BsGeoAlt } from "react-icons/bs";
 import ApartmentPrice from "./ApartmentPrice/ApartmentPrice";
 import { LiaCoinsSolid } from "react-icons/lia";
+import UniqButton from "@/components/UniqButton/UniqButton";
 
 interface ApartmentPageProps {
   apartment: Apartment;
@@ -20,6 +22,13 @@ interface ApartmentPageProps {
 function ApartmentPage({ apartment }: ApartmentPageProps) {
   const apartmentGallery = getApartmentImages(apartment);
   const googleMapsUrl = `https://www.google.com/maps?q=${apartment.location.lat},${apartment.location.lng}`;
+
+  const scrollToMap = () => {
+    const mapElement = document.getElementById("map");
+    if (mapElement) {
+      mapElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -31,13 +40,13 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           <div className={`${css.headerInfo} ${css.apartmentInfoItem}`}>
             <div className={css.headerTitle}>
               <h1 className={css.title}>{apartment.title}</h1>
-              <Link
-                href={"#map"}
+              <UniqButton
                 className={`${css.location} ${css.locationLink}`}
+                onClick={scrollToMap}
               >
                 <TbCurrentLocation />
                 {apartment.location.address}
-              </Link>
+              </UniqButton>
             </div>
             {apartment.createdAt && (
               <div className={css.createdAtText}>

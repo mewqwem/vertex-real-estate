@@ -25,7 +25,7 @@ const initialValues: SearchFormValues = {
 };
 
 const validationSchema = Yup.object().shape({
-  location: Yup.string().min(2, "Too short").required("Please enter location"),
+  location: Yup.string().min(2, "Too short"),
   dealType: Yup.string()
     .oneOf(["buy", "rent"])
     .required("Please select deal type"),

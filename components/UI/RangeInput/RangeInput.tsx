@@ -1,14 +1,37 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import {
+  PRICE_SLIDER_MAX,
+  parsePriceInput,
+  priceToSlider,
+  sliderToPrice,
+  snapPrice,
+} from "@/lib/priceRangeScale";
+import css from "./RangeInput.module.css";
 
 interface PriceRangeFilterProps {
   min: number;
   max: number;
   value: [number, number];
   onChange: (values: [number, number]) => void;
+}
+
+type PriceField = "min" | "max";
+
+function clampRange(
+  next: [number, number],
+  min: number,
+  max: number,
+): [number, number] {
+  const low = snapPrice(Math.min(next[0], next[1]), max);
+  const high = snapPrice(Math.max(next[0], next[1]), max);
+  return [
+    Math.max(min, Math.min(low, high)),
+    Math.min(max, Math.max(low, high)),
+  ];
 }
 
 export const PriceRangeFilter = ({
@@ -18,73 +41,114 @@ export const PriceRangeFilter = ({
   onChange,
 }: PriceRangeFilterProps) => {
   const [range, setRange] = useState<[number, number]>(value);
+  const [prevValue, setPrevValue] = useState(value);
+  const [editing, setEditing] = useState<PriceField | null>(null);
+  const [draftMin, setDraftMin] = useState("");
+  const [draftMax, setDraftMax] = useState("");
 
-  useEffect(() => {
+  if (value[0] !== prevValue[0] || value[1] !== prevValue[1]) {
+    setPrevValue(value);
     setRange(value);
-  }, [value]);
+  }
+
+  const sliderValue: [number, number] = [
+    priceToSlider(range[0], max),
+    priceToSlider(range[1], max),
+  ];
+
+  const commitRange = (next: [number, number]) => {
+    const clamped = clampRange(next, min, max);
+    setRange(clamped);
+    onChange(clamped);
+  };
 
   const handleSliderChange = (next: number | number[]) => {
-    if (Array.isArray(next)) {
-      setRange([next[0], next[1]]);
-    }
+    if (!Array.isArray(next)) return;
+
+    const prices: [number, number] = [
+      sliderToPrice(next[0], max),
+      sliderToPrice(next[1], max),
+    ];
+    setRange(clampRange(prices, min, max));
   };
 
   const handleAfterChange = (next: number | number[]) => {
-    if (Array.isArray(next)) {
-      onChange([next[0], next[1]]);
+    if (!Array.isArray(next)) return;
+
+    commitRange([sliderToPrice(next[0], max), sliderToPrice(next[1], max)]);
+  };
+
+  const startEditing = (field: PriceField) => {
+    setEditing(field);
+    if (field === "min") {
+      setDraftMin(String(range[0]));
+    } else {
+      setDraftMax(String(range[1]));
     }
   };
 
+  const commitInput = (field: PriceField) => {
+    const raw = field === "min" ? draftMin : draftMax;
+    const parsed = snapPrice(parsePriceInput(raw), max);
+    const next: [number, number] =
+      field === "min" ? [parsed, range[1]] : [range[0], parsed];
+
+    commitRange(next);
+    setEditing(null);
+  };
+
   return (
-    <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-      <h4 className="text-sm font-medium text-gray-700 mb-6">Price Range</h4>
+    <div className={css.wrapper}>
+      <h4 className={css.title}>Price Range</h4>
+
+      <div className={css.inputs}>
+        <label className={css.field}>
+          <span className={css.label}>Min price</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            className={css.input}
+            placeholder="$0"
+            value={editing === "min" ? draftMin : String(range[0])}
+            onFocus={() => startEditing("min")}
+            onChange={(e) => setDraftMin(e.target.value)}
+            onBlur={() => commitInput("min")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.currentTarget.blur();
+              }
+            }}
+          />
+        </label>
+        <label className={css.field}>
+          <span className={css.label}>Max price</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            className={css.input}
+            placeholder={`$${max.toLocaleString()}`}
+            value={editing === "max" ? draftMax : String(range[1])}
+            onFocus={() => startEditing("max")}
+            onChange={(e) => setDraftMax(e.target.value)}
+            onBlur={() => commitInput("max")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.currentTarget.blur();
+              }
+            }}
+          />
+        </label>
+      </div>
 
       <Slider
+        className={css.slider}
         range
-        min={min}
-        max={max}
-        value={range}
+        min={0}
+        max={PRICE_SLIDER_MAX}
+        value={sliderValue}
         onChange={handleSliderChange}
         onChangeComplete={handleAfterChange}
-        trackStyle={[{ backgroundColor: "#2563eb", height: 6 }]}
-        handleStyle={[
-          {
-            borderColor: "#2563eb",
-            height: 20,
-            width: 20,
-            marginTop: -7,
-            opacity: 1,
-            boxShadow: "none",
-          },
-          {
-            borderColor: "#2563eb",
-            height: 20,
-            width: 20,
-            marginTop: -7,
-            opacity: 1,
-            boxShadow: "none",
-          },
-        ]}
-        railStyle={{ backgroundColor: "#e5e7eb", height: 6 }}
       />
-
-      <div className="flex justify-between mt-4">
-        <div className="flex flex-col">
-          <span className="text-xs text-gray-400">Min price</span>
-          <span className="text-sm font-semibold">
-            ${range[0].toLocaleString()}
-          </span>
-        </div>
-        <div className="flex flex-col text-right">
-          <span className="text-xs text-gray-400">Max price</span>
-          <span className="text-sm font-semibold">
-            ${range[1].toLocaleString()}
-          </span>
-        </div>
-      </div>
     </div>
   );
 };
-
-
-

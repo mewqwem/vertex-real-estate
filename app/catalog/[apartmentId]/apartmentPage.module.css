@@ -17,8 +17,15 @@
   }
 }
 .btnBack {
-  border: 1px solid var(--neutral);
+  visibility: hidden;
+  position: fixed;
 
+  top: 70px;
+  left: 20px;
+
+  z-index: 9999;
+
+  border: 1px solid var(--neutral);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,10 +40,15 @@
     background-color 0.2s ease;
 }
 .btnBack:hover {
-  color: #fff;
   background-color: var(--primary-hover);
+  color: #fff;
 }
 .BtnBackIcon {
   width: 24px;
   height: 24px;
+}
+@media only screen and (min-width: 1044px) {
+  .btnBack {
+    visibility: visible;
+  }
 }

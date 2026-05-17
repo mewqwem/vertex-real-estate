@@ -28,16 +28,18 @@ export interface ApartmentFiltersFormValues {
   area: string;
 }
 
-export const PRICE_FILTER_MAX = 9999;
+export const PRICE_FILTER_MAX = 999999;
 
-export const APARTMENT_TYPE_OPTIONS: { value: ApartmentType | ""; label: string }[] =
-  [
-    { value: "", label: "Any property type" },
-    { value: "apartment", label: "Apartment" },
-    { value: "house", label: "House" },
-    { value: "cottage", label: "Cottage" },
-    { value: "villa", label: "Villa" },
-    { value: "townhouse", label: "Townhouse" },
-    { value: "duplex", label: "Duplex" },
-    { value: "commercial", label: "Commercial" },
-  ];
+export const APARTMENT_TYPE_OPTIONS: {
+  value: ApartmentType | "";
+  label: string;
+}[] = [
+  { value: "", label: "Any property type" },
+  { value: "apartment", label: "Apartment" },
+  { value: "house", label: "House" },
+  { value: "cottage", label: "Cottage" },
+  { value: "villa", label: "Villa" },
+  { value: "townhouse", label: "Townhouse" },
+  { value: "duplex", label: "Duplex" },
+  { value: "commercial", label: "Commercial" },
+];
