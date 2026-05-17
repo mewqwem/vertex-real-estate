@@ -18,7 +18,6 @@ function FeaturesList({ features }: FeaturesListProps) {
   return (
     <ul className={css.featuresList}>
       {sortedFeatures.map((item) => {
-        // Перевіряємо, чи ID цієї фічі є в масиві квартири
         const isIncluded = features.includes(item.id);
 
         return (
