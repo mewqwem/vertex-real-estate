@@ -18,7 +18,7 @@ export const metadata = {
     title: "Appartments of your dreams",
     description:
       "Discover top real estate offers with Real Vertex Estate. Verified listings, flexible rental options, and secure property investments. Your perfect space starts here!",
-    url: "https://images.unsplash.com/photo-1584738766473-61c083514bf4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    url: "/app/favicon.ico",
     images: [
       {
         url: "https://images.unsplash.com/photo-1584738766473-61c083514bf4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
