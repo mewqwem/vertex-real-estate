@@ -6,7 +6,9 @@ Vertex Real Estate is a modern platform for searching for real estate (apartment
 
 ## Demo
 
-https://vertex-real-estate-nu.vercel.app/
+Live Demo: https://vertex-real-estate-nu.vercel.app/
+
+Backend repository: https://github.com/mewqwem/vertex-real-estate-back
 
 
 ## What site visitors can do:
