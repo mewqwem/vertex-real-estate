@@ -15,6 +15,11 @@ export async function generateMetadata({
     const { apartmentId } = await params;
     const apartment = await getApartmentById(apartmentId);
 
+    const mainImage =
+      apartment.images && apartment.images.length > 0
+        ? apartment.images[0]
+        : "/placeholderImage.jpg";
+
     if (!apartment) return { title: "Apartment Not Found" };
 
     return {
@@ -25,7 +30,7 @@ export async function generateMetadata({
         description: apartment.description,
         images: [
           {
-            url: apartment.image,
+            url: mainImage,
             width: 1200,
             height: 630,
           },
