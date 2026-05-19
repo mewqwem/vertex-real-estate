@@ -6,6 +6,38 @@ import UniqButton from "@/components/UniqButton/UniqButton";
 import ApartmentPage from "@/components/Apartment/ApartmentPage/ApartmentPage";
 import { IoArrowBackOutline } from "react-icons/io5";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ apartmentId: string }>;
+}) {
+  try {
+    const { apartmentId } = await params;
+    const apartment = await getApartmentById(apartmentId);
+
+    if (!apartment) return { title: "Apartment Not Found" };
+
+    return {
+      title: `${apartment.title} - RealVertexEstate`,
+      description: apartment.description.slice(0, 160),
+      openGraph: {
+        title: apartment.title,
+        description: apartment.description,
+        images: [
+          {
+            url: apartment.image,
+            width: 1200,
+            height: 630,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    console.error("Failed to generate metadata:", error);
+    return { title: "Error Loading Apartment" };
+  }
+}
+
 async function page({ params }: { params: Promise<{ apartmentId: string }> }) {
   const { apartmentId } = await params;
 

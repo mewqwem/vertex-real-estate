@@ -38,3 +38,12 @@
 .contactsWhatsapp {
   background-color: var(--whatsapp-color);
 }
+.dealTypeText {
+  color: var(--neutral);
+  font-size: 16px;
+}
+@media (min-width: 1440px) {
+  .dealTypeText {
+    font-size: 24px;
+  }
+}

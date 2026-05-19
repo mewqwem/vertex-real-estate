@@ -55,13 +55,19 @@ function Filters({
   };
 
   const handleClearAll = () => {
+    const currentDealType = formikRef.current?.values?.dealType;
+
     const emptyValues = filtersToFormValues({});
+
+    if (currentDealType) {
+      emptyValues.dealType = currentDealType;
+    }
 
     if (formikRef.current) {
       formikRef.current.resetForm({ values: emptyValues });
     }
 
-    onApplyFilters({});
+    onApplyFilters(currentDealType ? { dealType: currentDealType } : {});
   };
 
   return (

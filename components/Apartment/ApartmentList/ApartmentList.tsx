@@ -8,16 +8,25 @@ interface ApartmentListProps {
 
 function ApartmentList({ apartments }: ApartmentListProps) {
   return (
+    // <ul className={css.apartmentList}>
+    //   {apartments
+    //     .filter((apartment) => apartment.status !== "Archive")
+    //     .map((apartment, index) => (
+    //       <ApartmentItem
+    //         key={apartment._id}
+    //         apartment={apartment}
+    //         apartmentIndex={index}
+    //       />
+    //     ))}
+    // </ul>
     <ul className={css.apartmentList}>
-      {apartments
-        .filter((apartment) => apartment.status !== "Archive")
-        .map((apartment, index) => (
-          <ApartmentItem
-            key={apartment._id}
-            apartment={apartment}
-            apartmentIndex={index}
-          />
-        ))}
+      {apartments.map((apartment, index) => (
+        <ApartmentItem
+          key={apartment._id}
+          apartment={apartment}
+          apartmentIndex={index}
+        />
+      ))}
     </ul>
   );
 }

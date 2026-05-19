@@ -37,7 +37,7 @@ function Header() {
     <header className={`${css.header} ${isOpen ? css.isOpen : ""}`}>
       <div className={css.logo}>
         <Link className={css.logoText} href={"/"}>
-          YourLogo
+          <span className={css.logoWord}>Real</span>VertexEstate
         </Link>
       </div>
       <Navigation path={path} />

@@ -107,7 +107,10 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           <h2 className={css.sectionTitle}>
             Price <LiaCoinsSolid />
           </h2>
-          <ApartmentPrice price={apartment.price} />
+          <ApartmentPrice
+            price={apartment.price}
+            dealType={apartment.dealType}
+          />
         </section>
       </div>
     </>
