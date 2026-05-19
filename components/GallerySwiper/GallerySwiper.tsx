@@ -23,8 +23,28 @@ interface GallerySwiperProps {
 }
 
 function GallerySwiper({ apartmentGallery }: GallerySwiperProps) {
+  const placeholderImage = "/placeholderImage.jpg";
   const [isOpen, setIsOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+
+  const gallery =
+    apartmentGallery &&
+    Array.isArray(apartmentGallery) &&
+    apartmentGallery.length > 0
+      ? apartmentGallery
+      : [placeholderImage];
+
+  const handleImageError = (imageIndex: number) => {
+    setFailedImages((prev) => new Set(prev).add(imageIndex));
+  };
+
+  const getImageSrc = (imageIndex: number) => {
+    return failedImages.has(imageIndex)
+      ? placeholderImage
+      : gallery[imageIndex];
+  };
+
   return (
     <>
       <Swiper
@@ -38,21 +58,22 @@ function GallerySwiper({ apartmentGallery }: GallerySwiperProps) {
         modules={[Pagination, Navigation]}
         className={css.swiper}
       >
-        {apartmentGallery.map((url, index) => (
+        {gallery.map((url, imageIndex) => (
           <SwiperSlide
-            key={index}
+            key={imageIndex}
             onClick={() => {
-              setIndex(index); // Запам'ятовуємо номер фото
-              setIsOpen(true); // Відкриваємо модалку
+              setIndex(imageIndex);
+              setIsOpen(true);
             }}
           >
             <Image
-              src={url}
-              alt={`Photo ${index + 1}`}
+              src={getImageSrc(imageIndex)}
+              alt={`Photo ${imageIndex + 1}`}
               className={css.image}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 1024px"
               fill
               style={{ cursor: "zoom-in" }}
+              onError={() => handleImageError(imageIndex)}
             />
           </SwiperSlide>
         ))}
@@ -61,7 +82,9 @@ function GallerySwiper({ apartmentGallery }: GallerySwiperProps) {
         open={isOpen}
         close={() => setIsOpen(false)}
         index={index}
-        slides={apartmentGallery.map((url) => ({ src: url }))}
+        slides={gallery.map((url, imageIndex) => ({
+          src: failedImages.has(imageIndex) ? placeholderImage : url,
+        }))}
         className={css.modal}
         controller={{ closeOnBackdropClick: true }}
         animation={{ fade: 300 }}
