@@ -11,6 +11,7 @@ import {
   DealType,
 } from "@/types/apartmentFilters";
 import { filtersToSearchParams } from "@/lib/apartmentFilters";
+import { AutoCompletePlace } from "../UI/AutoCompletePlace/AutoCompletePlace";
 
 interface SearchFormValues {
   location: string;
@@ -77,7 +78,7 @@ function SearchForm() {
             </div>
 
             <div className={css.fieldGroup}>
-              <Field
+              <AutoCompletePlace
                 name="location"
                 placeholder="City, region..."
                 className={`${css.input} ${errors.location && touched.location ? css.isInvalid : ""}`}

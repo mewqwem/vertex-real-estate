@@ -18,6 +18,7 @@ import {
   filtersToFormValues,
   formValuesToFilters,
 } from "@/lib/apartmentFilters";
+import { AutoCompletePlace } from "../UI/AutoCompletePlace/AutoCompletePlace";
 
 const validationSchema = Yup.object().shape({
   location: Yup.string(),
@@ -123,10 +124,15 @@ function Filters({
                   </div>
 
                   <div className={fieldCss.fieldGroup}>
-                    <Field
+                    {/* <Field
                       name="location"
                       placeholder="City, region..."
                       className={fieldCss.input}
+                    /> */}
+                    <AutoCompletePlace
+                      name="location"
+                      placeholder="City, region..."
+                      className={`fieldCss.input`}
                     />
                   </div>
 

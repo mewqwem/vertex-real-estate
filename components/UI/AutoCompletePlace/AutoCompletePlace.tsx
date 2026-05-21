@@ -1,0 +1,48 @@
+import React from "react";
+import { useField } from "formik";
+import {
+  GeoapifyContext,
+  GeoapifyGeocoderAutocomplete,
+} from "@geoapify/react-geocoder-autocomplete";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+
+interface AutoCompletePlaceProps {
+  name: string;
+  placeholder?: string;
+  className?: string;
+}
+
+export const AutoCompletePlace: React.FC<AutoCompletePlaceProps> = ({
+  name,
+  placeholder,
+  className,
+}) => {
+  const [field, meta, helpers] = useField(name);
+
+  const handlePlaceSelect = (value) => {
+    if (value) {
+      const locationText = value.properties.city;
+      helpers.setValue(locationText);
+    } else {
+      helpers.setValue("");
+    }
+  };
+
+  const handleUserInput = (value: string) => {
+    helpers.setValue(value);
+  };
+
+  return (
+    <GeoapifyContext apiKey="ed9862435d28494487c94ef317cd085a">
+      <div className={className}>
+        <GeoapifyGeocoderAutocomplete
+          placeholder={placeholder}
+          type="city"
+          value={field.value}
+          placeSelect={handlePlaceSelect}
+          onUserInput={handleUserInput}
+        />
+      </div>
+    </GeoapifyContext>
+  );
+};
