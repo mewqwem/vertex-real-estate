@@ -2,7 +2,6 @@ import Link from "next/link";
 import css from "./MobileMenu.module.css";
 import { IoHomeOutline } from "react-icons/io5";
 import { CiGrid41 } from "react-icons/ci";
-import Filters from "../Filters/Filters";
 
 interface MobileMenuProps {
   onLinkClick?: () => void;

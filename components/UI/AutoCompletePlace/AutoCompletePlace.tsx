@@ -6,6 +6,21 @@ import {
 } from "@geoapify/react-geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 
+interface GeoapifyPlaceProperties {
+  city?: string;
+  country?: string;
+  formatted?: string;
+}
+
+interface GeoapifyPlaceFeature {
+  type: string;
+  properties: GeoapifyPlaceProperties;
+  geometry: {
+    type: string;
+    coordinates: [number, number];
+  };
+}
+
 interface AutoCompletePlaceProps {
   name: string;
   placeholder?: string;
@@ -17,11 +32,12 @@ export const AutoCompletePlace: React.FC<AutoCompletePlaceProps> = ({
   placeholder,
   className,
 }) => {
-  const [field, meta, helpers] = useField(name);
+  const [field, , helpers] = useField<string>(name);
 
-  const handlePlaceSelect = (value) => {
-    if (value) {
-      const locationText = value.properties.city;
+  // Type explicitly as GeoapifyPlaceFeature or null when cleared
+  const handlePlaceSelect = (value: GeoapifyPlaceFeature | null) => {
+    if (value && value.properties) {
+      const locationText = value.properties.city || "";
       helpers.setValue(locationText);
     } else {
       helpers.setValue("");
