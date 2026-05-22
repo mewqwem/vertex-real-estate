@@ -33,7 +33,7 @@
   transition: all 0.2s ease;
 }
 
-@media (min-width: 768px) and (max-width: 1440px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .apartmentList {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -49,7 +49,7 @@
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
   .apartmentList {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
