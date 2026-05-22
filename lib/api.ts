@@ -60,8 +60,6 @@ export const getAddressFromCoords = async (lat: number, lng: number) => {
 };
 
 export const getHotOffers = async () => {
-  const { data } = await apartmentInstance.get<Apartment[]>(
-    `/apartments/hotoffers`,
-  );
+  const { data } = await apartmentInstance.get<Apartment[]>(`/hotoffers`);
   return data;
 };
