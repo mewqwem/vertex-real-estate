@@ -13,6 +13,7 @@
   --color-red-100: oklch(92.096% 0.03554 17.655);
   --telegram-color: #0088cc;
   --whatsapp-color: #25d366;
+  --white: #fff;
 }
 
 .visually-hidden {

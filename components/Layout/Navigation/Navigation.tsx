@@ -1,7 +1,7 @@
 import React from "react";
 import css from "./Navigation.module.css";
 import Link from "next/link";
-import UniqButton from "../UniqButton/UniqButton";
+import UniqButton from "../../UI/UniqButton/UniqButton";
 import { BsTelephoneForward } from "react-icons/bs";
 
 interface NavigationProps {

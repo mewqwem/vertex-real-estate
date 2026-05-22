@@ -1,19 +1,20 @@
 "use client";
 import { getApartmentImages } from "@/helpers/getApartmentImages";
 import { Apartment } from "@/types/apartments";
-import css from "./ApartmentPage.module.css";
-import GallerySwiper from "@/components/GallerySwiper/GallerySwiper";
 import { TbCurrentLocation } from "react-icons/tb";
 import { formatDate } from "@/helpers/formatDate";
+import { MdChecklistRtl } from "react-icons/md";
+import { BsGeoAlt } from "react-icons/bs";
+import { LiaCoinsSolid } from "react-icons/lia";
+
+import css from "./ApartmentPage.module.css";
+import GallerySwiper from "@/components/UI/GallerySwiper/GallerySwiper";
 import TagList from "@/components/UI/TagList/TagList";
 import ApartmentMap from "../ApartmentMap/ApartmentMap";
 import Link from "next/link";
-import FeaturesList from "@/components/FeaturesList/FeaturesList";
-import { MdChecklistRtl } from "react-icons/md";
-import { BsGeoAlt } from "react-icons/bs";
+import ApartmentFeaturesList from "@/components/Apartment/ApartmentFeaturesList/ApartmentFeaturesList";
 import ApartmentPrice from "./ApartmentPrice/ApartmentPrice";
-import { LiaCoinsSolid } from "react-icons/lia";
-import UniqButton from "@/components/UniqButton/UniqButton";
+import UniqButton from "@/components/UI/UniqButton/UniqButton";
 
 interface ApartmentPageProps {
   apartment: Apartment;
@@ -101,7 +102,7 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           <h2 className={css.sectionTitle}>
             Features <MdChecklistRtl />
           </h2>
-          <FeaturesList features={apartment.features} />
+          <ApartmentFeaturesList features={apartment.features} />
         </section>
         <section className={`${css.appWrapper} ${css.appPriceWrapper}`}>
           <h2 className={css.sectionTitle}>
@@ -110,6 +111,7 @@ function ApartmentPage({ apartment }: ApartmentPageProps) {
           <ApartmentPrice
             price={apartment.price}
             dealType={apartment.dealType}
+            salePrice={apartment.salePrice}
           />
         </section>
       </div>

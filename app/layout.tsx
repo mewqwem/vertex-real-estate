@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
-import Header from "@/components/Header/Header";
+import Header from "@/components/Layout/Header/Header";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
 const roboto = Roboto({

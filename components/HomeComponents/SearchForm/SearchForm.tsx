@@ -4,14 +4,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import css from "./SearchForm.module.css";
-import UniqButton from "../UniqButton/UniqButton";
 import {
   APARTMENT_TYPE_OPTIONS,
   ApartmentType,
   DealType,
 } from "@/types/apartmentFilters";
 import { filtersToSearchParams } from "@/lib/apartmentFilters";
-import { AutoCompletePlace } from "../UI/AutoCompletePlace/AutoCompletePlace";
+import { AutoCompletePlace } from "@/components/UI/AutoCompletePlace/AutoCompletePlace";
+import UniqButton from "@/components/UI/UniqButton/UniqButton";
 
 interface SearchFormValues {
   location: string;

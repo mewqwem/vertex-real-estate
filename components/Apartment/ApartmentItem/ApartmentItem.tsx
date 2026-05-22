@@ -9,7 +9,7 @@ import { Apartment } from "@/types/apartments";
 import { LuBed, LuSquareDashed } from "react-icons/lu";
 import { RiStairsLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
-import UniqButton from "../../UniqButton/UniqButton";
+import UniqButton from "../../UI/UniqButton/UniqButton";
 import { GoLinkExternal } from "react-icons/go";
 import Link from "next/link";
 
@@ -24,20 +24,7 @@ const isNewApartment = (createdAt?: string): boolean => {
   const now = new Date();
   const daysAgo =
     (now.getTime() - apartmentDate.getTime()) / (1000 * 60 * 60 * 24);
-  return daysAgo <= 30;
-};
-
-const isHotPrice = (price: number, dealType?: string): boolean => {
-  let isHotPrice = false;
-
-  if (price <= 450000 && dealType === "buy") {
-    isHotPrice = true;
-  }
-  if (price <= 2499 && dealType === "rent") {
-    isHotPrice = true;
-  }
-
-  return isHotPrice;
+  return daysAgo <= 7;
 };
 
 const handleClickApartment = () => {};
@@ -56,8 +43,8 @@ const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
           {isNewApartment(apartment.createdAt) && (
             <div className={`${css.badge} ${css.new}`}>New</div>
           )}
-          {isHotPrice(apartment.price, apartment.dealType) && (
-            <div className={`${css.badge} ${css.hot}`}>Hot</div>
+          {apartment.salePrice !== null && (
+            <div className={`${css.badge} ${css.hot}`}>Sale</div>
           )}
         </div>
 
@@ -92,7 +79,20 @@ const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
         <div className={css.apartmentHead}>
           <h3 className={css.apartmentTitle}>{apartment.title}</h3>
           <div className={css.apartmentPriceWrapper}>
-            <p className={css.apartmentPrice}>{apartment.price} $</p>
+            {apartment.salePrice !== null ? (
+              <>
+                <div className={css.salePriceWrapper}>
+                  <span className={css.salePrice}>{apartment.price} $</span>
+                  <p
+                    className={`${css.apartmentPrice} ${css.apartmentSalePrice}`}
+                  >
+                    {apartment.salePrice} $
+                  </p>
+                </div>
+              </>
+            ) : (
+              <p className={css.apartmentPrice}>{apartment.price} $</p>
+            )}
           </div>
         </div>
         <p className={css.location}>

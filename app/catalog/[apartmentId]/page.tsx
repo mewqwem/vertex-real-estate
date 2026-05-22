@@ -2,7 +2,7 @@ import { getApartmentById } from "@/lib/api";
 import React from "react";
 import css from "./apartmentPage.module.css";
 import axios from "axios";
-import UniqButton from "@/components/UniqButton/UniqButton";
+import UniqButton from "@/components/UI/UniqButton/UniqButton";
 import ApartmentPage from "@/components/Apartment/ApartmentPage/ApartmentPage";
 import { IoArrowBackOutline } from "react-icons/io5";
 

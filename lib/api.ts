@@ -58,3 +58,10 @@ export const getAddressFromCoords = async (lat: number, lng: number) => {
     console.error("Error fetching address:", error);
   }
 };
+
+export const getHotOffers = async () => {
+  const { data } = await apartmentInstance.get<Apartment[]>(
+    `/apartments/hotoffers`,
+  );
+  return data;
+};

@@ -6,9 +6,10 @@ import { FaRegCalendarAlt, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 interface ApartmentPriceProps {
   price: number;
   dealType: string | undefined;
+  salePrice: number | null;
 }
 
-function ApartmentPrice({ price, dealType }: ApartmentPriceProps) {
+function ApartmentPrice({ price, dealType, salePrice }: ApartmentPriceProps) {
   if (!dealType) {
     dealType = "buy";
   }
@@ -16,12 +17,16 @@ function ApartmentPrice({ price, dealType }: ApartmentPriceProps) {
   return (
     <>
       <div>
-        <p className={css.price}>
-          $ {price}
-          <span className={css.dealTypeText}>
-            {dealType === "rent" && "/night"}
-          </span>
-        </p>
+        {salePrice !== null ? (
+          <>
+            <div className={css.salePriceWrapper}>
+              <p className={`${css.price} ${css.newPrice}`}>{salePrice} $</p>
+              <span className={css.salePrice}>{price} $</span>
+            </div>
+          </>
+        ) : (
+          <p className={css.apartmentPrice}>{price} $</p>
+        )}
       </div>
       <ul className={css.contactsList}>
         <li className={`${css.contactsItem} ${css.contactsForm}`}>

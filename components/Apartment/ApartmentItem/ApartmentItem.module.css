@@ -139,3 +139,18 @@
 
   padding: 12px;
 }
+.salePriceWrapper {
+  position: relative;
+}
+.salePrice {
+  position: absolute;
+  top: 25px;
+  right: 0;
+
+  color: var(--neutral);
+
+  text-decoration: line-through;
+}
+.apartmentSalePrice {
+  color: var(--hot);
+}

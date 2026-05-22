@@ -10,11 +10,11 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useEffect, useRef } from "react";
 import ApartmentList from "../ApartmentList/ApartmentList";
-import Filters from "../../Filters/Filters";
 import css from "./ApartmentClient.module.css";
 import { TailSpin } from "react-loader-spinner";
-import UniqButton from "@/components/UniqButton/UniqButton";
+import UniqButton from "@/components/UI/UniqButton/UniqButton";
 import { IoReload } from "react-icons/io5";
+import Filters from "@/components/Catalog/Filters/Filters";
 
 function ApartmentClient() {
   const router = useRouter();

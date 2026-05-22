@@ -1,0 +1,58 @@
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+@media only screen and (min-width: 768px) {
+  .featuresList {
+    flex-direction: row;
+  }
+}
+.featuresItem {
+  display: flex;
+
+  flex: 1;
+
+  justify-content: start;
+  align-items: center;
+
+  gap: 12px;
+
+  background-color: #ffffff16;
+  backdrop-filter: blur(12);
+
+  border-radius: 12px;
+
+  color: var(--white);
+
+  padding: 16px;
+}
+.featuresTitle {
+  font-size: 18px;
+}
+.featuresText {
+  font-size: 14px;
+}
+.featuresContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  align-items: start;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+}
+.featuresIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ffffff20;
+  backdrop-filter: blur(12);
+
+  border-radius: 8px;
+
+  padding: 8px;
+}

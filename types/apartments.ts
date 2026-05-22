@@ -16,6 +16,7 @@ export interface Apartment {
   status: string;
   dealType?: "buy" | "rent";
   apartmentType?: string;
+  salePrice: number | null;
 }
 
 interface Location {

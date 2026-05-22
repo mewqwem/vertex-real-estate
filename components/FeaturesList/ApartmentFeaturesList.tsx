@@ -1,12 +1,12 @@
 import { APARTMENT_FEATURES } from "@/constants/features";
-import css from "./FeaturesList.module.css";
+import css from "./ApartmentFeaturesList.module.css";
 import { IoCheckmark, IoClose } from "react-icons/io5";
 
-interface FeaturesListProps {
+interface ApartmentFeaturesListProps {
   features: string[];
 }
 
-function FeaturesList({ features }: FeaturesListProps) {
+function ApartmentFeaturesList({ features }: ApartmentFeaturesListProps) {
   const sortedFeatures = [...APARTMENT_FEATURES].sort((a, b) => {
     const aIncluded = features.includes(a.id);
     const bIncluded = features.includes(b.id);
@@ -43,4 +43,4 @@ function FeaturesList({ features }: FeaturesListProps) {
   );
 }
 
-export default FeaturesList;
+export default ApartmentFeaturesList;

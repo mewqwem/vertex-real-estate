@@ -4,8 +4,6 @@ import css from "./Filters.module.css";
 import fieldCss from "./PropertySearchFields.module.css";
 import { Field, Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
-import { PriceRangeFilter } from "../UI/RangeInput/RangeInput";
-import UniqButton from "../UniqButton/UniqButton";
 import { TbFilterSearch } from "react-icons/tb";
 import { useRef, useState } from "react";
 import {
@@ -18,7 +16,9 @@ import {
   filtersToFormValues,
   formValuesToFilters,
 } from "@/lib/apartmentFilters";
-import { AutoCompletePlace } from "../UI/AutoCompletePlace/AutoCompletePlace";
+import { AutoCompletePlace } from "@/components/UI/AutoCompletePlace/AutoCompletePlace";
+import { PriceRangeFilter } from "@/components/UI/RangeInput/RangeInput";
+import UniqButton from "@/components/UI/UniqButton/UniqButton";
 
 const validationSchema = Yup.object().shape({
   location: Yup.string(),

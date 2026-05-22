@@ -47,3 +47,17 @@
     font-size: 24px;
   }
 }
+.salePriceWrapper {
+  display: flex;
+
+  gap: 20px;
+
+  align-items: center;
+}
+.salePrice {
+  color: var(--neutral);
+  text-decoration: line-through;
+}
+.newPrice {
+  color: var(--hot);
+}
