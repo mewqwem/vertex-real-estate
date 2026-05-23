@@ -90,3 +90,10 @@
 .showMoreCard:hover .arrowIcon {
   transform: translateX(4px);
 }
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  margin: 0 auto;
+}

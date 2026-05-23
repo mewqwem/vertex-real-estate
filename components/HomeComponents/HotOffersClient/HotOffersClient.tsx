@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import css from ".//HotOffersClient.module.css";
 import { FiArrowRightCircle } from "react-icons/fi";
 import Link from "next/link";
+import Spinner from "@/components/UI/Spinner/Spinner";
 
 function HotOffersClient() {
   const {
@@ -18,8 +19,14 @@ function HotOffersClient() {
     staleTime: 5 * 60 * 1000,
   });
 
-  if (isLoading) return <div>Завантаження гарячих пропозицій...</div>;
-  if (isError) return <div>Не вдалося завантажити дані</div>;
+  if (isLoading)
+    return (
+      <div className={css.errorWrapper}>
+        <Spinner size={40} />
+        Loading...
+      </div>
+    );
+  if (isError) return <div>Error</div>;
 
   return (
     <>
