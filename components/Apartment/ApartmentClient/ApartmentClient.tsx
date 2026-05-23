@@ -11,10 +11,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useEffect, useRef } from "react";
 import ApartmentList from "../ApartmentList/ApartmentList";
 import css from "./ApartmentClient.module.css";
-import { TailSpin } from "react-loader-spinner";
 import UniqButton from "@/components/UI/UniqButton/UniqButton";
 import { IoReload } from "react-icons/io5";
 import Filters from "@/components/Catalog/Filters/Filters";
+import Spinner from "@/components/UI/Spinner/Spinner";
 
 function ApartmentClient() {
   const router = useRouter();
@@ -56,7 +56,11 @@ function ApartmentClient() {
     initialPageParam: 1,
   });
 
-  const apartments = data?.pages.flatMap((page) => page.apartments) ?? [];
+  const apartments = useMemo(
+    () => data?.pages.flatMap((page) => page.apartments) ?? [],
+    [data],
+  );
+
   const apartmentsCount = data?.pages[0]?.totalItems ?? 0;
 
   useEffect(() => {
@@ -95,7 +99,7 @@ function ApartmentClient() {
 
       {isLoading ? (
         <div className={css.loadingApartments}>
-          <TailSpin color="var(--primary)" />
+          <Spinner size={40} />
           Loading...
         </div>
       ) : isError ? (

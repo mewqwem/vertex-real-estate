@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import css from "./Catalog.module.css";
 import ApartmentClient from "../Apartment/ApartmentClient/ApartmentClient";
-import { TailSpin } from "react-loader-spinner";
+import Spinner from "../UI/Spinner/Spinner";
 
 function Catalog() {
   return (
@@ -11,8 +11,10 @@ function Catalog() {
       </div>
       <Suspense
         fallback={
-          <div style={{ display: "flex", justifyContent: "center", padding: 40 }}>
-            <TailSpin color="var(--primary)" />
+          <div
+            style={{ display: "flex", justifyContent: "center", padding: 40 }}
+          >
+            <Spinner size={40} />
           </div>
         }
       >

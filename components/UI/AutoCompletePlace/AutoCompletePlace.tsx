@@ -34,7 +34,6 @@ export const AutoCompletePlace: React.FC<AutoCompletePlaceProps> = ({
 }) => {
   const [field, , helpers] = useField<string>(name);
 
-  // Type explicitly as GeoapifyPlaceFeature or null when cleared
   const handlePlaceSelect = (value: GeoapifyPlaceFeature | null) => {
     if (value && value.properties) {
       const locationText = value.properties.city || "";

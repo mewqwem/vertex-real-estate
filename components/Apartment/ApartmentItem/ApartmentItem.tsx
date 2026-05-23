@@ -2,36 +2,33 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { TailSpin } from "react-loader-spinner";
 import css from "./ApartmentItem.module.css";
+import Link from "next/link";
+
+import UniqButton from "../../UI/UniqButton/UniqButton";
+
 import { getApartmentMainImage } from "@/helpers/getApartmentImages";
+import { getSalePrice } from "@/helpers/salePercent";
+import { isNewApartment } from "@/helpers/isNewApaertment";
+
 import { Apartment } from "@/types/apartments";
+
 import { LuBed, LuSquareDashed } from "react-icons/lu";
 import { RiStairsLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
-import UniqButton from "../../UI/UniqButton/UniqButton";
 import { GoLinkExternal } from "react-icons/go";
-import Link from "next/link";
-import { getSalePrice } from "@/helpers/salePercent";
+import Spinner from "@/components/UI/Spinner/Spinner";
 
 interface ApartmentItemProps {
   apartment: Apartment;
   apartmentIndex: number;
 }
 
-const isNewApartment = (createdAt?: string): boolean => {
-  if (!createdAt) return false;
-  const apartmentDate = new Date(createdAt);
-  const now = new Date();
-  const daysAgo =
-    (now.getTime() - apartmentDate.getTime()) / (1000 * 60 * 60 * 24);
-  return daysAgo <= 7;
-};
-
 const handleClickApartment = () => {};
 
 const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
+
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
@@ -56,12 +53,7 @@ const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
 
         {isLoading && (
           <div className={css.loading}>
-            <TailSpin
-              height="40"
-              width="40"
-              color="var(--primary)"
-              ariaLabel="tail-spin-loading"
-            />
+            <Spinner size={40} />
           </div>
         )}
 
