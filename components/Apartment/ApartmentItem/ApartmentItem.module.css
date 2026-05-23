@@ -64,7 +64,8 @@
 .new {
   background-color: var(--primary);
 }
-.hot {
+.discount {
+  font-size: 14px;
   background-color: var(--hot);
 }
 

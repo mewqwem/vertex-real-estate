@@ -12,6 +12,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import UniqButton from "../../UI/UniqButton/UniqButton";
 import { GoLinkExternal } from "react-icons/go";
 import Link from "next/link";
+import { getSalePrice } from "@/helpers/salePercent";
 
 interface ApartmentItemProps {
   apartment: Apartment;
@@ -32,9 +33,12 @@ const handleClickApartment = () => {};
 const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
   const placeholderImage = "/placeholderImage.jpg";
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const mainImage = getApartmentMainImage(apartment, placeholderImage);
-  const [imgSrc, setImgSrc] = useState(mainImage);
+  const finalSrc = hasError ? placeholderImage : mainImage;
+
+  const discountPercent = getSalePrice(apartment.price, apartment.salePrice);
 
   return (
     <li className={css.apartmentItem}>
@@ -44,7 +48,9 @@ const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
             <div className={`${css.badge} ${css.new}`}>New</div>
           )}
           {apartment.salePrice !== null && (
-            <div className={`${css.badge} ${css.hot}`}>Sale</div>
+            <div className={`${css.badge} ${css.discount}`}>
+              -{discountPercent}%
+            </div>
           )}
         </div>
 
@@ -61,17 +67,17 @@ const ApartmentItem = ({ apartment, apartmentIndex }: ApartmentItemProps) => {
 
         <Link href={`/catalog/${apartment._id}`} className={css.link}>
           <Image
-            src={imgSrc}
+            src={finalSrc}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt={apartment.title}
             className={css.apartmentImage}
             onLoad={() => setIsLoading(false)}
             onError={() => {
-              setImgSrc(placeholderImage);
+              setHasError(true);
               setIsLoading(false);
             }}
-            priority={apartmentIndex < 6}
+            priority={apartmentIndex < 3}
           />
         </Link>
       </div>
