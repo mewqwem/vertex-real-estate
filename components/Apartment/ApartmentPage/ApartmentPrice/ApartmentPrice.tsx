@@ -25,7 +25,7 @@ function ApartmentPrice({ price, dealType, salePrice }: ApartmentPriceProps) {
             </div>
           </>
         ) : (
-          <p className={css.apartmentPrice}>{price} $</p>
+          <p className={css.price}>{price} $</p>
         )}
       </div>
       <ul className={css.contactsList}>
